@@ -1,0 +1,186 @@
+% Compile with
+% ./compile_tex.sh main.tex
+
+% Preamble
+\documentclass[leqno]{article}[11pt]
+
+% bibliography
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{csquotes}
+\usepackage[style=numeric, sorting=none, backend=biber, url=true]{biblatex}
+\addbibresource{sources.bib}
+
+% Exclude the 'note' field from the bibliography
+\AtEveryBibitem{\clearfield{note}}
+\AtEveryBibitem{\clearfield{url}}
+\setlength{\emergencystretch}{3em}
+\usepackage{subcaption} % For subfigure environment
+
+% Disable Hyphenation Globally
+% \hyphenpenalty=10000
+% \exhyphenpenalty=10000
+
+\newcommand{\adjustedTotalPages}{\number\numexpr\pageref{LastPage}-1\relax}
+
+% Packages
+\usepackage{textcomp}
+\usepackage{amsmath}
+\usepackage{indentfirst}
+\usepackage{ragged2e}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage{array}
+\usepackage{float}
+\usepackage{caption}
+\usepackage[margin=1.5cm, top=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{lastpage}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{titling}
+\usepackage{wrapfig} % For wrapfigure environment
+
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    stringstyle=\color{red},
+    commentstyle=\color{green!50!black},
+    numbers=left,
+    numberstyle=\tiny,
+    stepnumber=1,
+    numbersep=5pt,
+    showstringspaces=false,
+    tabsize=4,
+    breaklines=true,
+    frame=single,
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={},
+    % Reduce spacing in code blocks
+}
+
+% Set the title format
+\setlength{\droptitle}{-5em} % Adjust the vertical space above the title
+
+% Trademark
+\newcommand{\textrademark}{\textsuperscript{\texttrademark}}
+
+% Better headers
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\nouppercase{\leftmark}}
+\fancyfoot[L]{Raphaël Ribes} % Footer left
+\fancyfoot[C]{}              % Footer center
+\fancyfoot[R]{\thepage/\pageref{LastPage}}      % Footer right
+
+\renewcommand{\headrulewidth}{0.4pt} % Thin line under header
+\renewcommand{\footrulewidth}{0.4pt} % Line above the footer
+\geometry{
+    bottom=2cm,
+    footskip=1cm
+}
+% Make the footer smaller
+
+% Set default paragraph indentation
+\setlength{\parindent}{2em}
+
+% Table of contents
+\renewcommand{\contentsname}{Table of Contents}
+
+% Change section numbering to Roman numerals
+\renewcommand{\thesection}{\arabic{section}-}
+\renewcommand{\thesubsection}{\Alph{subsection})}
+
+% Document
+\begin{document}
+
+    \onehalfspace
+
+    \begin{titlepage}
+        \begin{center}
+            \includegraphics[height=3cm]{images/logo_UM}\hspace{0.2\textwidth}
+            \includegraphics[height=3cm]{images/logo_fds_rond}\hspace{0.2\textwidth}
+            \includegraphics[height=3cm]{images/Logo_Bioinfo}
+
+            {\Huge Master Bioinformatique\\[1cm]}
+
+            {\large HAI817 -- Machine learning 1 (méthodes classiques)}\\[0.7cm]
+
+            \begin{center}
+                \large{Professeurs: P. Poncelet, K. Todorov, E. Raoufi}
+            \end{center}
+
+            \vspace{3.5cm}
+
+            % Title with bars
+            \hrulefill\\[0.4cm]
+            {\fontsize{18}{22}\textbf{Classification d'assertions venant d’X (Twitter) selon leur rapport à la science}}\\[0.4cm]
+            \hrulefill
+
+            \vspace{1cm}
+            {\large Par : Tiziri Tamani (22415178), Ciriàn Mahony (22400729), Raphaël Ribes (22401925), Dalia Belmadi (22208849)}
+
+            \vspace{1cm}
+            Lien vers le projet : \url{https://github.com/RaphaelRibes/machine-learning/}
+        \end{center}
+    \end{titlepage}
+
+% Define the page style for the first two pages
+    \fancypagestyle{firstpagestyle}{
+        \fancyhf{} % Clear all headers and footers
+        \renewcommand{\headrulewidth}{0pt} % Remove header line
+        \renewcommand{\footrulewidth}{0pt} % Remove footer line
+    }
+
+% Apply the custom style to the first page
+    \thispagestyle{firstpagestyle}
+
+% Reset and start page numbering from the second page
+    \newpage
+
+    \tableofcontents
+    \thispagestyle{firstpagestyle}
+
+    \newpage
+    \setcounter{page}{1} % Start numbering from 1
+
+    \section{Introduction}\label{sec:introduction}
+    \input{sections/introduction}
+
+    \newpage
+    \section{Matériel et Méthodes}\label{sec:matetmet}
+    \input{sections/matetmet}
+
+    \newpage
+    \section{Résultats}\label{sec:results}
+    \input{sections/results}
+
+    \newpage
+    \section{Discussion}\label{sec:discussion}
+    \input{sections/discussion}
+
+    \newpage
+    \section{Conclusion}\label{sec:conclusion}
+    \input{sections/conclusion}
+
+    \newpage
+    \section{Références}\label{sec:references}
+    \printbibliography[heading=none]
+
+    \newpage
+    \section{Annexes}\label{sec:annexes}
+    \input{sections/annexes}
+
+\end{document}
+
