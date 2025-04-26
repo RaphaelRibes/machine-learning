@@ -1,0 +1,4 @@
+J'ai un un ensemble des données supervisé et je veux créer une modèle de machine learning qui utilise des tweets (un string qui est une phrase de texte) pour prédire le variable "science_related" (biniaire 0, où 1) 
+
+
+J'ai remarqué que beacoup de tweets classé comme "science_related" contient comme mot une partie du corps. Est-ce que je pourrait utiliser ce fait pour créer des modèles de random forest où SVM, où est-ce que il est considéré comme overfitting ?
