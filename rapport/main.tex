@@ -2,7 +2,7 @@
 % ./compile_tex.sh main.tex
 
 % Preamble
-\documentclass[leqno]{article}[11pt]
+\documentclass[leqno]{article}[12pt]
 
 % bibliography
 \usepackage[utf8]{inputenc}
@@ -152,15 +152,12 @@
     \tableofcontents
     \thispagestyle{firstpagestyle}
 
-    \newpage
-    \setcounter{page}{1} % Start numbering from 1
-
-    \section{Introduction}\label{sec:introduction}
+    \vfill
+    \section*{Résumé}\label{sec:introduction}
     \input{sections/introduction}
 
     \newpage
-    \section{Matériel et Méthodes}\label{sec:matetmet}
-    \input{sections/matetmet}
+    \setcounter{page}{1} % Start numbering from 1
 
     \newpage
     \section{Résultats}\label{sec:results}
@@ -173,14 +170,6 @@
     \newpage
     \section{Conclusion}\label{sec:conclusion}
     \input{sections/conclusion}
-
-    \newpage
-    \section{Références}\label{sec:references}
-    \printbibliography[heading=none]
-
-    \newpage
-    \section{Annexes}\label{sec:annexes}
-    \input{sections/annexes}
 
 \end{document}
 

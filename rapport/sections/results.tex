@@ -1,0 +1,23 @@
+\subsection{Pré-traitement}
+\input{sections/matetmet}
+
+\subsection{Modélisation}
+Pour chacunes des étapes, nous allons comparer différents modèles entre eux pour sélectionner le meilleur modèle.
+Par meilleur modèle, on entend la meilleure précision et le plus petit écart-type.
+
+Chaque modèle est testé par cross-validation sur 10 itérations.
+
+\subsection{Modèle 1: Sci vs Non-sci}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics{images/model_comparison}
+    \caption{Comparaison des modèles pour la classification des tweets scientifiques et non scientifiques.}
+    \label{fig:model_comparison_sci_nsci}
+\end{figure}
+
+Les deux meilleurs modèles sont le \texttt{SVM} et \texttt{Logistic Regression} mais on préfèrera cette dernière, car elle a un plus petit écart-type.
+
+\subsection{Modèle 2: claim et ref vs contexte}
+
+\subsection{Modèle 3: claim vs ref vs contexte}
