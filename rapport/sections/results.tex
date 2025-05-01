@@ -1,23 +1,75 @@
-\subsection{Pré-traitement}
+\subsection{Pré-traitement}\label{subsec:pre-traitement}
 \input{sections/matetmet}
 
-\subsection{Modélisation}
+\subsection{Modélisation}\label{subsec:modelisation}
 Pour chacunes des étapes, nous allons comparer différents modèles entre eux pour sélectionner le meilleur modèle.
 Par meilleur modèle, on entend la meilleure précision et le plus petit écart-type.
 
 Chaque modèle est testé par cross-validation sur 10 itérations.
 
-\subsection{Modèle 1: Sci vs Non-sci}
+\subsection{Modèle 1: Sci vs Non-sci}\label{subsec:modele-1:-sci-vs-non-sci}
 
 \begin{figure}[H]
     \centering
-    \includegraphics{images/model_comparison}
+    \includegraphics[width=0.75\textwidth]{images/model_comparison_1}
     \caption{Comparaison des modèles pour la classification des tweets scientifiques et non scientifiques.}
     \label{fig:model_comparison_sci_nsci}
 \end{figure}
 
 Les deux meilleurs modèles sont le \texttt{SVM} et \texttt{Logistic Regression} mais on préfèrera cette dernière, car elle a un plus petit écart-type.
 
-\subsection{Modèle 2: claim et ref vs contexte}
+\subsection{Modèle 2: claim et ref vs contexte}\label{subsec:modele-2:-claim-et-ref-vs-contexte}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{images/model_comparison_2}
+    \caption{Comparaison des modèles pour la classification des tweets claim et ref vs contexte.}
+    \label{fig:model_comparison_clmref_context}
+\end{figure}
 
-\subsection{Modèle 3: claim vs ref vs contexte}
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/confusion_2.json-Random Forest_is_claim_or_ref_confusion_matrix}
+        \label{fig:confusion_2_1}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/confusion_2.json-Random Forest_is_context_confusion_matrix}
+        \label{fig:confusion_2_2}
+    \end{minipage}
+    \caption{Matrice de confusion du modèle Random Forest pour la classification des tweets claim et ref vs contexte.}
+    \label{fig:confusion_2}
+\end{figure}
+
+\subsection{Modèle 3: claim vs ref vs contexte}\label{subsec:modele-3:-claim-vs-ref-vs-contexte}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{images/model_comparison_3}
+    \caption{Comparaison des modèles pour la classification des tweets claim vs ref vs contexte.}
+    \label{fig:model_comparison_clm_ref_context}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/confusion_3.json-Random Forest_claim_confusion_matrix}
+        \label{fig:confusion_3_1}
+    \end{minipage}
+    \hspace{1em}
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/confusion_3.json-Random Forest_context_confusion_matrix}
+        \label{fig:confusion_3_2}
+    \end{minipage}
+    \hspace{1em}
+    \begin{minipage}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/confusion_3.json-Random Forest_reference_confusion_matrix}
+        \label{fig:confusion_3_3}
+    \end{minipage}
+    \caption{Matrice de confusion du modèle Random Forest pour la classification des tweets claim vs ref vs contexte.}
+    \label{fig:confusion_3}
+\end{figure}
