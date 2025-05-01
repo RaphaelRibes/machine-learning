@@ -1,3 +1,5 @@
+import json
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
@@ -113,11 +115,45 @@ def check_outlier(data_lot, single_value, alpha=0.05):
     is_outlier = p_value < alpha
     return is_outlier, p_value
 
+def is_in_a_category(dataset):
+    """
+    Check if the dataset contains any of the specified categories.
+
+    Args:
+        dataset (pd.DataFrame): The dataset to check.
+
+    Returns:
+        bool: True if any category is present, False otherwise.
+    """
+    categories = ["scientific_claim", "scientific_reference", "scientific_context"]
+    dataset = dataset[dataset["science_related"] == 1]
+
+    # I want how many have 0, 1, 2 or 3 categories
+    counts = dataset[categories].sum(axis=1)
+    counts = counts.value_counts().sort_index()
+    print("Counts of categories in the dataset:")
+    for count, freq in counts.items():
+        print(f"{int(count)} categories: {freq} instances")
+    return counts
+
+def model_comparison_sci_nsci(path):
+    with open(path , "r") as f:
+        data = json.load(f)
+
+    keys = [val.replace(" ", "\n") for val in data["keys"]]
+    plt.boxplot(data["values"], labels=keys)
+    plt.ylabel("Accuracy")
+    plt.tight_layout()
+    plt.savefig(f"rapport/images/{path.split('.')[0]}.png", dpi=300)
+    plt.show()
+
 if __name__ == "__main__":
+    model_comparison_sci_nsci("model_comparison.json")
     # Load the dataset
     try:
         dataset = pd.read_csv('scitweets_export.tsv', sep='\t')
         plothastaglinkscounts(dataset)
+        is_in_a_category(dataset)
     except FileNotFoundError:
         print("Error: 'scitweets_export.tsv' not found. Please make sure the file is in the correct directory.")
     except Exception as e:
