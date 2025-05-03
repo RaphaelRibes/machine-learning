@@ -1,1 +1,1 @@
-{"keys": ["Logistic Regression", "Naive Bayes", "k-NN", "Random Forest", "SVM"], "values": [{"Sci": [[141, 6], [16, 143]]}, {"Sci": [[126, 21], [8, 151]]}, {"Sci": [[98, 49], [10, 149]]}, {"Sci": [[145, 2], [51, 108]]}, {"Sci": [[141, 6], [12, 147]]}]}
+{"keys": ["Logistic Regression", "Naive Bayes", "k-NN", "Random Forest", "SVM"], "values": [{"sci": [[141, 6], [16, 143]]}, {"sci": [[126, 21], [8, 151]]}, {"sci": [[98, 49], [10, 149]]}, {"sci": [[145, 2], [51, 108]]}, {"sci": [[141, 6], [12, 147]]}]}
