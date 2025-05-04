@@ -9,7 +9,7 @@ Par la suite, nous présentons les résultats de classification obtenus pour cha
 Par meilleur modèle, on entend la meilleure précision et le plus petit écart-type.
 Chaque modèle est testé par cross-validation sur 10 itérations.
 
-\subsection{Modèle 1: Scientifique versus Non Scientifique}\label{subsec:modele-1:-sci-vs-non-sci}
+\subsection{Tâche 1 : Classification binaire ({SCI} vs. {NON-SCI})}\label{subsec:modele-1:-sci-vs-non-sci}
 Dans cette tâche, nous avons comparé plusieurs modèles de classification afin de distinguer les tweets scientifiques des non-scientifiques.
 L’objectif était d’évaluer les performances de différentes approches d’apprentissage supervisé appliquées à un problème de classification binaire.
 
@@ -44,21 +44,25 @@ Chacun a été optimisé à l’aide d’une recherche par grille (GridSearchCV)
 Ces performances stables, observées à la fois sur le jeu de test et au cours de la validation croisée, sont clairement visibles dans le boxplot de la figure (\autoref{fig:model_comparison_sci_nsci}).
 En comparaison, la régression logistique s’est également montrée très efficace, représentant une alternative pertinente, notamment dans des cas où l’on recherche un bon compromis entre précision et rappel.
 
+\vfill
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\textwidth]{images/model_comparison_1}
-    \caption{Comparaison des modèles pour la classification des tweets scientifiques et non scientifiques.}
-    \label{fig:model_comparison_sci_nsci}
+    \begin{minipage}[b]{0.55\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/model_comparison_1}
+        \caption{Comparaison des modèles pour la classification des tweets scientifiques et non scientifiques.}
+        \label{fig:model_comparison_sci_nsci}
+    \end{minipage}\hfill
+    \begin{minipage}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/confusion_1.json-SVM_Sci_confusion_matrix}
+        \caption{Matrice de confusion du modèle SVM pour la classification des tweets scientifiques et non scientifiques.}
+        \label{fig:confusion_1.json-SVM_sci_confusion_matrix}
+    \end{minipage}
 \end{figure}
+\newpage
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.49\textwidth]{images/confusion_1.json-SVM_Sci_confusion_matrix}
-    \caption{Matrice de confusion du modèle SVM pour la classification des tweets scientifiques et non scientifiques.}
-    \label{fig:confusion_1.json-SVM_sci_confusion_matrix}
-\end{figure}
-
-\subsection{Modèle 2: Affirmation et Référence versus Contexte}\label{subsec:modele-2:-claim-et-ref-vs-contexte}
+\subsection{Tâche 2 : Classification Binaire Multi-Label ({CLAIM, REF} vs. {CONTEXT})}\label{subsec:modele-2:-claim-et-ref-vs-contexte}
 À présent, nous allons considérer les classes "Affirmation" et "Référence" qui citent une affirmation scientifique d’une part, et la classe "Contexte" qui servent de contexte
 D’autre part, toujours afin de réaliser une classification binaire.
 Les tweets analysés sont uniquement ceux classés comme scientifiques dans la première tâche.
@@ -121,7 +125,7 @@ Bien que le k-NN ait présenté des résultats impressionnants avec des scores d
     \label{fig:confusion_2}
 \end{figure}
 
-\subsection{Modèle 3: Affirmation versus Référence versus Contexte}\label{subsec:modele-3:-claim-vs-ref-vs-contexte}
+\subsection{Tâche 3 :classification multi-classe et multi-label non exclusive ({CLAIM} vs. {REF} vs. {CONTEXT})}\label{subsec:modele-3:-claim-vs-ref-vs-contexte}
 Cette dernière tâche est la plus fine du projet : elle consiste à classer chaque tweet scientifique selon trois catégories : Affirmation, Référence ou Contexte.
 Bien qu’il s’agisse d’une classification à trois classes, le problème reste de nature multi-label, car un même tweet peut appartenir à plusieurs catégories simultanément.
 
@@ -177,19 +181,19 @@ En effet, Random Forest ou Gradient Boosting, paraissent mieux gérer la classif
 
 \begin{figure}[h]
     \centering
-    \begin{minipage}[b]{0.45\textwidth}
+    \begin{minipage}[b]{0.3\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/confusion_3.json-Random Forest_claim_confusion_matrix}
         \label{fig:confusion_3_1}
     \end{minipage}
     \hspace{1em}
-    \begin{minipage}[b]{0.45\textwidth}
+    \begin{minipage}[b]{0.3\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/confusion_3.json-Random Forest_context_confusion_matrix}
         \label{fig:confusion_3_2}
     \end{minipage}
     \hspace{1em}
-    \begin{minipage}[b]{0.45\textwidth}
+    \begin{minipage}[b]{0.3\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/confusion_3.json-Random Forest_reference_confusion_matrix}
         \label{fig:confusion_3_3}

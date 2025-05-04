@@ -121,7 +121,7 @@
                 \large{Professeurs: P. Poncelet, K. Todorov, E. Raoufi}
             \end{center}
 
-            \vspace{3.5cm}
+            \vspace{2.5cm}
 
             % Title with bars
             \hrulefill\\[0.4cm]
@@ -133,6 +133,11 @@
 
             \vspace{1cm}
             Lien vers le projet : \url{https://github.com/RaphaelRibes/machine-learning/}
+
+            \vfill
+            \justifying
+            \section*{Résumé}\label{sec:introduction}
+            \input{sections/introduction}
         \end{center}
     \end{titlepage}
 
@@ -146,21 +151,11 @@
 % Apply the custom style to the first page
     \thispagestyle{firstpagestyle}
 
-% Reset and start page numbering from the second page
-    \newpage
-
-    \tableofcontents
-    \thispagestyle{firstpagestyle}
-
-    \vfill
-    \section*{Résumé}\label{sec:introduction}
-    \input{sections/introduction}
-
     \newpage
     \setcounter{page}{1} % Start numbering from 1
 
     \newpage
-    \section{Résultats}\label{sec:results}
+    \section{Analyse et Évaluations des résultats}\label{sec:results}
     \input{sections/results}
 
     \newpage
