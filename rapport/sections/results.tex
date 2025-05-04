@@ -1,4 +1,4 @@
-\subsection{Pré-traitement}\label{subsec:pre-traitement}
+\usepackage{hyperref}\subsection{Pré-traitement}\label{subsec:pre-traitement}
 \input{sections/matetmet}
 
 \subsection{Modélisation}\label{subsec:modelisation}
@@ -26,22 +26,23 @@ Chacun a été optimisé à l’aide d’une recherche par grille (GridSearchCV)
 
 \begin{table}[H]
     \centering
-    \caption{Performances des modèles - Tâche 1}
+    \caption{Performances des modèles - Tâche 1 (KFold = 10)}
     \begin{tabular}{lcccc}
         \toprule
-        Modèle & Accuracy (\autoref{fig:model_comparison_sci_nsci}) & Précision (\autoref{fig:confusion_1.json-logistic-regression_sci_confusion_matrix}) & Rappel (\autoref{fig:confusion_1.json-logistic-regression_sci_confusion_matrix}) & F1-score \\
+        Modèle & Accuracy (\autoref{fig:model_comparison_sci_nsci}) & Précision (\autoref{fig:confusion_1.json-SVM_sci_confusion_matrix}) & Rappel (\autoref{fig:confusion_1.json-SVM_sci_confusion_matrix}) & F1-score \\
         \midrule
-        Logistic Regression & 0.9327 & 0.93 & 0.93 & 0.93 \\
-        Naive Bayes & 0.9092 & 0.91 & 0.90 & 0.90 \\
-        k-NN & 0.8092 & 0.83 & 0.80 & 0.80 \\
-        Random Forest & 0.8680 & 0.86 & 0.84 & 0.83 \\
-        SVM (linéaire) & 0.9412 & 0.94 & 0.94 & 0.94 \\
+        Logistic Regression & 0.9327 ± 0.0163 & 0.93 & 0.93 & 0.93 \\
+        Naive Bayes & 0.9118 ± 0.0197 & 0.91 & 0.90 & 0.89 \\
+        k-NN & 0.8111 ± 0.0286 & 0.82 & 0.79 & 0.78 \\
+        Random Forest & 0.8575 ± 0.0246 & 0.89 & 0.86 & 0.86 \\
+        SVM & \textbf{0.9431 ± 0.0137} & \textbf{0.92} & \textbf{0.92} & \textbf{0.92} \\
         \bottomrule
     \end{tabular}\label{tab:model_comparison_sci_nsci}
 \end{table}
 
-\noindent Le modèle SVM semble être le plus performant pour cette tâche, affichant les meilleurs scores en précision, rappel et F1-score, ainsi qu’une accuracy élevée accompagnée mais un plus grand écart-type que la régression logistique \autoref{fig:model_comparison_sci_nsci}.
-C'est pour cette raison de stabilité que l'on préfèrera la régression logistique car elle présente une baisse de performance négligeable comparé à la stabilité du modèle.
+\noindent Le modèle SVM semble être le plus performant pour cette tâche, affichant les meilleurs scores en précision, rappel et F1-score, ainsi qu’une accuracy élevée accompagnée du plus faible écart-type.
+Ces performances stables, observées à la fois sur le jeu de test et au cours de la validation croisée, sont clairement visibles dans le boxplot de la figure (\autoref{fig:model_comparison_sci_nsci}).
+En comparaison, la régression logistique s’est également montrée très efficace, représentant une alternative pertinente, notamment dans des cas où l’on recherche un bon compromis entre précision et rappel.
 
 \begin{figure}[H]
     \centering
@@ -52,9 +53,9 @@ C'est pour cette raison de stabilité que l'on préfèrera la régression logist
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.49\textwidth]{images/confusion_1.json-Logistic Regression_Sci_confusion_matrix}
-    \caption{Matrice de confusion du modèle Logistic Regression pour la classification des tweets scientifiques et non scientifiques.}
-    \label{fig:confusion_1.json-logistic-regression_sci_confusion_matrix}
+    \includegraphics[width=0.49\textwidth]{images/confusion_1.json-SVM_Sci_confusion_matrix}
+    \caption{Matrice de confusion du modèle SVM pour la classification des tweets scientifiques et non scientifiques.}
+    \label{fig:confusion_1.json-SVM_sci_confusion_matrix}
 \end{figure}
 
 \subsection{Modèle 2: Affirmation et Référence versus Contexte}\label{subsec:modele-2:-claim-et-ref-vs-contexte}
@@ -63,11 +64,13 @@ D’autre part, toujours afin de réaliser une classification binaire.
 Les tweets analysés sont uniquement ceux classés comme scientifiques dans la première tâche.
 
 \subsubsection{Préparation des données}
-Le prétraitement textuel a suivi une logique proche de celle adoptée dans la première tâche (minuscules, stop words, lemmatisation), mais sans suppression des mentions et caractères 	spéciaux, afin d’explorer s’ils peuvent porter une valeur contextuelle utile.
+Le prétraitement textuel a suivi une logique proche de celle adoptée dans la première tâche (minuscules, stop words, lemmatisation), mais sans suppression des mentions et caractères spéciaux, afin d’explorer s’ils peuvent porter une valeur contextuelle utile.
+La vectorisation a été réalisée à l’aide de TF-IDF, en élargissant la fenêtre aux trigrammes (1 à 3-grammes) pour mieux capturer les structures linguistiques propres aux énoncés de type affirmation ou citation.
 
-La vectorisation a été réalisée à l’aide de TF-IDF, en élargissant la fenêtre aux trigrammes (1 à 3-grammes) afin de mieux capturer les structures linguistiques propres aux énoncés de type affirmation ou citation.
+Contrairement à la première tâche, nous n’avons pas appliqué SMOTE ici, le déséquilibre est partiel dans la distribution des combinaisons de labels (tableau 2,) car la combinaison {1,1} est majoritaire, tandis que la combinaison {0,1} est fortement sous-représentée.
+La classification est multi-label (un tweet peut être à la fois CONTEXT et CLAIM/REF).
+Nous avons donc implémenté un rééchantillonnage manuel spécifique au multi-label, en nous basant sur l’identification de toutes les combinaisons de labels possibles et en suréchantillonnant celles qui étaient sous-représentées.
 
-Contrairement à la première tâche, nous n’avons pas appliqué SMOTE Ici, le déséquilibre est partiel dans la distribution des combinaisons de labels (tableau 2,) car la combinaison {1,1} est majoritaire, tandis que la combinaison {0,1} est fortement sous-représentée. La classification est multi-label (un tweet 	peut être à la fois CONTEXT et CLAIM/REF). Nous avons donc  implémenté un rééchantillonnage manuel spécifique au multi-label, en nous basant sur l’identification de toutes les combinaisons de labels possibles et en suréchantillonnant celles qui étaient sous-représentées. 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{images/model_comparison_2}

@@ -167,7 +167,7 @@ if __name__ == "__main__":
     model_comparison_sci_nsci("model_comparison_3.json")
     model_comparison_sci_nsci("model_comparison_2.json")
 
-    plot_confusion_matrix("confusion_1.json", "Logistic Regression")
+    plot_confusion_matrix("confusion_1.json", "SVM")
     plot_confusion_matrix("confusion_2.json", "Random Forest")
     plot_confusion_matrix("confusion_3.json", "Random Forest")
     # Load the dataset
