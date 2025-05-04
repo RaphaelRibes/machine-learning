@@ -1,3 +1,5 @@
-L'information sur Internet et les réseaux sociaux pose de nouveaux défis en matière de traitement automatique du langage.
-Dans ce contexte, il devient essentiel de pouvoir automatiquement classifier le contenu textuel, notamment pour identifier des textes à caractère scientifique ou non.
-C’est dans cette optique que s’inscrit notre projet, qui vise à analyser des articles ou extraits textuels, et à déterminer s'ils sont liés au domaine scientifique ou non.
+Ce rapport présente une étude sur la classification de tweets afin de déterminer leur lien avec la science.
+Face aux défis posés par le traitement automatique du langage sur les réseaux sociaux, ce projet vise à classifier automatiquement des extraits textuels pour identifier ceux à caractère scientifique.
+Différents modèles de classification supervisée ont été appliqués et comparés sur trois tâches de classification hiérarchiques, après un prétraitement des données visant à réduire le bruit et à gérer le déséquilibre des classes.
+Les résultats montrent que le modèle SVM est le plus performant pour la classification binaire (tweets scientifiques vs. non-scientifiques ainsi que Claim et Reference vs. Context ), tandis que le modèle Gradient Boosting excelle dans la classification multi-label (affirmation/référence vs. contexte).
+L'étude souligne l'importance du prétraitement et de l'adaptation des modèles aux spécificités des données textuelles issues des réseaux sociaux, tout en discutant des limites des modèles et des pistes d'amélioration pour les travaux futurs, notamment l'utilisation de modèles de langage pré-entraînés et de techniques avancées de rééquilibrage.

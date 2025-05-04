@@ -44,7 +44,6 @@ Chacun a été optimisé à l’aide d’une recherche par grille (GridSearchCV)
 Ces performances stables, observées à la fois sur le jeu de test et au cours de la validation croisée, sont clairement visibles dans le boxplot (\autoref{fig:model_comparison_sci_nsci}).
 En comparaison, la régression logistique s’est également montrée très efficace, représentant une alternative pertinente, notamment dans des cas où l’on recherche un bon compromis entre précision et rappel.
 
-\vfill
 \begin{figure}[H]
     \centering
     \begin{minipage}[b]{0.55\textwidth}
@@ -60,7 +59,6 @@ En comparaison, la régression logistique s’est également montrée très effi
         \label{fig:confusion_1.json-SVM_sci_confusion_matrix}
     \end{minipage}
 \end{figure}
-\newpage
 
 \subsection{Tâche 2 : Classification Binaire Multi-Label ({CLAIM, REF} vs. {CONTEXT})}\label{subsec:modele-2:-claim-et-ref-vs-contexte}
 À présent, nous allons considérer les classes "Affirmation" et "Référence" qui citent une affirmation scientifique d’une part, et la classe "Contexte" qui servent de contexte
@@ -81,7 +79,7 @@ L’objectif était d’évaluer l’efficacité de différentes approches d’a
 
 \begin{table}[H]
     \centering
-    \caption{Performances - Tâche 2}
+    \caption{Performances des modèles - Tâche 3 (KFold = 10)}
     \begin{tabular}{lcccc}
         \toprule
         Modèle & Accuracy & Précision & Rappel & F1-score \\
@@ -100,29 +98,29 @@ Le modèle Gradient Boosting a montré des performances supérieures dans le cad
 L'optimisation des hyperparamètres à l'aide de GridSearchCV a permis d'affiner les paramètres clés, tels que le learning rate (0.1) et la profondeur maximale (5), pour obtenir un score de validation croisée de 0.9236, garantissant une excellente généralisation.
 En comparaison avec d'autres modèles comme le SVM et le Random Forest, qui ont également montré des performances solides, le Gradient Boosting s'est distingué par sa capacité à mieux gérer les classes déséquilibrées et à produire des résultats plus équilibrés.
 Bien que le k-NN ait présenté des résultats impressionnants avec des scores de précision et de rappel élevés (0.99), il a montré un léger sur-apprentissage, ce qui peut poser un problème avec de très grands ensembles de données.
+\vspace{-1em}
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.6\textwidth]{images/confusion_2.json-Random Forest_is_claim_or_ref_confusion_matrix}
+        \label{fig:confusion_2_1}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.6\textwidth]{images/confusion_2.json-Random Forest_is_context_confusion_matrix}
+        \label{fig:confusion_2_2}
+    \end{minipage}
+    \caption{Matrice de confusion du modèle Random Forest pour la classification des tweets claim et ref vs contexte.}
+    \label{fig:confusion_2}
+\end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{images/model_comparison_2}
     \caption{Comparaison des modèles pour la classification des tweets claim et ref vs contexte.}
     \label{fig:model_comparison_clmref_context}
-\end{figure}
-
-\begin{figure}[h]
-    \centering
-    \begin{minipage}[b]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{images/confusion_2.json-Random Forest_is_claim_or_ref_confusion_matrix}
-        \label{fig:confusion_2_1}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{images/confusion_2.json-Random Forest_is_context_confusion_matrix}
-        \label{fig:confusion_2_2}
-    \end{minipage}
-    \caption{Matrice de confusion du modèle Random Forest pour la classification des tweets claim et ref vs contexte.}
-    \label{fig:confusion_2}
 \end{figure}
 
 \subsection{Tâche 3 :classification multi-classe et multi-label non exclusive ({CLAIM} vs. {REF} vs. {CONTEXT})}\label{subsec:modele-3:-claim-vs-ref-vs-contexte}
@@ -140,7 +138,7 @@ Enfin, en raison du déséquilibre marqué entre les catégories (par exemple, t
 \subsubsection{Analyse comparative des performances des différents modèles}
 \begin{table}[H]
     \centering
-    \caption{Performances - Tâche 3}
+    \caption{Performances des modèles - Tâche 3 (KFold = 10)}
     \begin{tabular}{lcccc}
         \toprule
         Modèle & Accuracy & Hamming Loss & F1-score & Rappel \\
@@ -156,44 +154,38 @@ Enfin, en raison du déséquilibre marqué entre les catégories (par exemple, t
     \end{tabular}\label{tab:model_comparison_clm_ref_context}
 \end{table}
 
-Dans cette tâche, tous les modèles de classification présentent une précision et un F1-score relativement bons.
+Dans cette tâche, tous les modèles de classification présentent une précision et un F1-score relativement bons (\autoref{tab:model_comparison_clm_ref_context})
 On remarque en revanche des valeurs de Hamming Loss plus faibles pour des modèles comme Random Forest, Gradient Boosting et Logistic Regression.
-Ceci indique une capacité à mieux classer les données tout en minimisant les erreurs globales.
+Ceci indique une capacité à mieux classer les données tout en minimisant les erreurs globales.\\
 
 \noindent La précision est généralement élevée pour les classes claim et context, mais elle est un peu plus faible pour la classe reference, ce qui peut expliquer pourquoi ces modèles ont des performances variées.
 Cela montre que les modèles sont bons pour identifier les assertions et les contextes, mais ont plus de difficulté à classer correctement les références.
-Ceci peut être dû à une classe reference plus difficile à différencier ou moins représentée dans le jeu de données.
+Ceci peut être dû à une classe reference plus difficile à différencier ou moins représentée dans le jeu de données.\\
 
 Cependant, le F1-score est parfois un peu plus élevé que le score d'accuracy.
 Les modèles cherchent à optimiser un compromis entre précision et rappel pour chaque classe.
 
-La Hamming Loss plus élevée pour des modèles comme k-NN et Naive Bayes est probablement le reflet de leur difficulté à bien distinguer toutes les classes.
+\noindent La Hamming Loss plus élevée pour des modèles comme k-NN et Naive Bayes est probablement le reflet de leur difficulté à bien distinguer toutes les classes.
 Particulièrement pour la classe reference, qui semble poser plus de défis en termes de précision et de rappel.
 Cela explique aussi pourquoi ces modèles, bien que performants dans certaines classes, peuvent avoir des scores globaux de précision et de rappel moins élevés par rapport à d'autres.
 En effet, Random Forest ou Gradient Boosting, paraissent mieux gérer la classification dans l’ensemble.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.75\textwidth]{images/model_comparison_3}
-    \caption{Comparaison des modèles pour la classification des tweets claim vs ref vs contexte.}
-    \label{fig:model_comparison_clm_ref_context}
-\end{figure}
-
+\vfill
 \begin{figure}[h]
     \centering
-    \begin{minipage}[b]{0.3\textwidth}
+    \begin{minipage}[b]{0.33\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/confusion_3.json-Random Forest_claim_confusion_matrix}
         \label{fig:confusion_3_1}
     \end{minipage}
-    \hspace{1em}
-    \begin{minipage}[b]{0.3\textwidth}
+    \hspace{-1em}
+    \begin{minipage}[b]{0.33\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/confusion_3.json-Random Forest_context_confusion_matrix}
         \label{fig:confusion_3_2}
     \end{minipage}
-    \hspace{1em}
-    \begin{minipage}[b]{0.3\textwidth}
+    \hspace{-1em}
+    \begin{minipage}[b]{0.33\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/confusion_3.json-Random Forest_reference_confusion_matrix}
         \label{fig:confusion_3_3}
@@ -201,8 +193,15 @@ En effet, Random Forest ou Gradient Boosting, paraissent mieux gérer la classif
     \caption{Matrice de confusion du modèle Random Forest pour la classification des tweets claim vs ref vs contexte.}
     \label{fig:confusion_3}
 \end{figure}
+\newpage
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{images/model_comparison_3}
+    \caption{Comparaison des modèles pour la classification des tweets claim vs ref vs contexte.}
+    \label{fig:model_comparison_clm_ref_context}
+\end{figure}
 
-Plusieurs tweets ont été mal classés selon la matrice de confusion car ils appartiennent en réalité à plusieurs classes à la fois, ce que notre système de classification a du mal à détecter simultanément.
+Plusieurs tweets ont été mal classés selon la matrice de confusion (\autoref{fig:confusion_3}) car ils appartiennent en réalité à plusieurs classes à la fois, ce que notre système de classification a du mal à détecter simultanément.
 L’accuracy, étant une métrique très stricte, pénalise fortement ce type d’ambiguïté.
 Par exemple, un tweet à la fois claim et reference ne sera considéré comme bien classé que s’il est entièrement attribué à la bonne classe unique.
 Nous présentons dans notre notebook une liste des tweets mal classés avec leur nombre pour illustrer cet impact.
