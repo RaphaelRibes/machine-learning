@@ -140,10 +140,10 @@ def plot_confusion_matrix(path, model_name):
     values: dict = data["values"][key_index]
 
     for label, matrix in values.items():
-        plt.figure(figsize=(8, 6))
+        plt.figure(figsize=(6, 6))
         plt.imshow(matrix, interpolation='nearest', cmap=plt.cm.Blues)
-        plt.title(f"Confusion Matrix for {model_name} - {label}")
-        plt.colorbar()
+        plt.title(f"Confusion Matrix for \n {model_name} - {label}", fontsize=20)
+        # plt.colorbar()
         plt.xticks([0, 1], ["True", "False"])
         plt.yticks([0, 1], ["True", "False"])
         matrix = np.array(matrix)
@@ -153,10 +153,11 @@ def plot_confusion_matrix(path, model_name):
             for j in range(matrix.shape[1]):
                 plt.text(j, i, format(matrix[i, j], 'd'),
                          horizontalalignment="center",
-                         color="white" if matrix[i, j] > threshold else "black")
+                         color="white" if matrix[i, j] > threshold else "black",
+                         fontsize=20)
 
-        plt.ylabel('True label')
-        plt.xlabel('Predicted label')
+        plt.ylabel('Real label', fontsize=20)
+        plt.xlabel('Predicted label', fontsize=20)
         plt.tight_layout()
         plt.savefig(f"rapport/images/{path}-{model_name}_{label}_confusion_matrix.png", dpi=300)
         plt.show()
