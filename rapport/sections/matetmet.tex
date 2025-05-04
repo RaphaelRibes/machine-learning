@@ -9,11 +9,18 @@ Nous avons donc appliqué les étapes suivantes, adaptées à chaque tâche :
     \item Gestion du déséquilibre
 \end{itemize}
 
-Des tests ont été effectués dans le cadre de cette classification en utilisant uniquement les attributs importants extraits à l’aide du classifieur Random Forest.
+Des tests ont été effectués dans le cadre de cette classification en utilisant uniquement les attributs importants (\autoref{fig:distribmots}) extraits à l’aide du classifieur Random Forest.
 Cependant, les résultats n’étaient pas très satisfaisants.
 Nous avons donc envisagé de réduire manuellement la taille maximale des features lors de la vectorisation, afin d’observer le comportement du modèle.
 Cette décision se justifie par la présence de bruit dans les données, bruit qui reste néanmoins représentatif pour distinguer les tweets scientifiques des non-scientifiques.
 C’est pourquoi nous avons choisi de ne pas effectuer une classification uniquement à partir de ces attributs.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/distribmots}
+    \caption{Distribution des 20 mots les plus fréquents dans les tweets scientifiques et non scientifiques après prétraitement}
+    \label{fig:distribmots}
+\end{figure}
 
 Ces étapes ont été adaptées à chaque type de classification (Scientifique versus Non Scientifique, Affirmation et Référence versus Contexte, Affirmation versus Référence versus Contexte) afin d’obtenir les meilleures performances.
 Dans la suite de ce rapport, une comparaison entre les données brutes et les données après traitement sera présentée, accompagnée d’une justification des choix effectués.
@@ -21,14 +28,14 @@ Par la suite pour chaque classification, on effectuera une évaluation comparati
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/PCA-BPT}
+    \includegraphics[width=0.75\textwidth]{images/PCA-BPT}
     \caption{Visualisation des tweets vectorisés (PCA 2D) avant prétraitement}
     \label{fig:pca-bpt}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{images/PCA-APT}
+    \includegraphics[width=0.75\textwidth]{images/PCA-APT}
     \caption{Visualisation des tweets vectorisés (PCA 2D) après prétraitement}
     \label{fig:pca-apt}
 \end{figure}
