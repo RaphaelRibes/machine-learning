@@ -18,15 +18,3 @@ C’est pourquoi nous avons choisi de ne pas effectuer une classification unique
 Ces étapes ont été adaptées à chaque type de classification (Scientifique versus Non Scientifique, Affirmation et Référence versus Contexte, Affirmation versus Référence versus Contexte) afin d’obtenir les meilleures performances.
 Dans la suite de ce rapport, une comparaison entre les données brutes et les données après traitement sera présentée, accompagnée d’une justification des choix effectués.
 Par la suite pour chaque classification, on effectuera une évaluation comparative des performances de classification.
-
-On regarde le nombre de \texttt{@} et lien par tweet selon le type de tweet scientifique (\autoref{fig:hashtag_count}).
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.75\textwidth]{images/hashtag_links_mentions_count_outliers}
-    \caption{Nombre de \texttt{@} et de lien par tweet selon le type de tweet scientifique}
-    \label{fig:hashtag_count}
-\end{figure}
-
-Après avoir réalisé des tests d'indépendance de student sur chaque variable, les \textit{p-values} ne descendent pas en dessous de 0.18 donc on ne remarque pas de différence significative entre les tweets scientifiques et non scientifiques.
-On peut ainsi conclure que ces variables ne sont pas pertinentes pour la classification des tweets scientifiques, on les retirera de notre dataset.

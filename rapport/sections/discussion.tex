@@ -1,0 +1,20 @@
+\subsection{Limites des Modèles}\label{subsec:limites-des-modeles}
+Malgré des performances globalement satisfaisantes, chaque modèle présente certaines limites :
+\begin{itemize}
+  \item \textbf{Modèles linéaires (régression logistique, SVM) :} sensibles aux features bruitées ou non pertinentes, ils peuvent peiner à capturer des relations complexes dans les données textuelles.
+  \item \textbf{Naive Bayes :} basé sur l’indépendance conditionnelle des features, il tend à sursimplifier les relations entre les mots et peut produire des résultats biaisés dans le cas de dépendances lexicales fortes.
+  \item \textbf{k-NN :} sensible à la dimensionnalité et aux données bruitées, ce modèle peut être affecté par des mots non informatifs ou rares présents dans les tweets.
+  \item \textbf{Random Forest :} bien qu’efficace, il peut sur-apprendre certains patterns lorsque le déséquilibre des classes n’est pas bien traité.
+\end{itemize}
+
+\subsection{Analyse des Features Importantes}\label{subsec:analyse-des-features-importantes}
+Afin de mieux comprendre le comportement des modèles, nous avons extrait les features les plus importantes à l’aide du classifieur Random Forest.
+Cette démarche nous a permis d’identifier les mots les plus discriminants entre les tweets scientifiques et non-scientifiques.
+Ces termes ont ensuite été analysés en fonction de leur fréquence d’apparition, représentée sous forme de bar plot (cf Figure X), ce qui a facilité l’interprétation des décisions du modèle et la compréhension des signaux textuels les plus informatifs.
+
+\subsection{Inspection Manuelle des Erreurs}\label{subsec:inspection-manuelle-des-erreurs}
+Pour les cas où les performances des modèles étaient jugées insuffisantes, une analyse manuelle des erreurs de classification a été réalisée.
+Nous avons examiné les tweets mal classés, en particulier les faux positifs et faux négatifs, afin d’identifier des exemples ambigus ou potentiellement mal annotés.
+Cette inspection a permis de mieux comprendre les limites des modèles face à des contenus complexes ou \textit{borderlines}.
+Lorsque des motifs d’erreur récurrents ont été repérés, nous avons tenté d’ajuster le prétraitement des données ou d’équilibrer manuellement certaines combinaisons de labels.
+Enfin, des modifications ciblées du pipeline ont été mises en place pour corriger ces erreurs, tout en veillant à ne pas nuire à la capacité de généralisation des modèles sur des données nouvelles.
